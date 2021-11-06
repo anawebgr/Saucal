@@ -8,7 +8,7 @@ Username,Password for api authetication
 Time cache expired in secs
 
 And a Widget that 
-Get the settings from account page form  post them to end point and save
+Get the settings from account page form  post them to end point and 
 display the results
 
 
