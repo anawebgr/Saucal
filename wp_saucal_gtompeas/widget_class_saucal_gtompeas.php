@@ -27,7 +27,7 @@ class saucal_gtompeas_widget extends WP_Widget
         );
     }
 
-    public function posttoapi($auserparams)
+    public function posttoapi($auserparams, $username, $password)
     {
 
       
@@ -41,7 +41,10 @@ class saucal_gtompeas_widget extends WP_Widget
                 'httpversion' => '1.1',
                 'body' => $auserparams,
                 'sslverify' => 'false',
-               
+                'headers' => array(
+                    'Authorization' => 'Basic ' . base64_encode($username . ':' . $password),
+                ),
+
             )
         );
 
@@ -71,9 +74,9 @@ class saucal_gtompeas_widget extends WP_Widget
             $cachetimesecs= get_user_meta($current_user->ID, 'cachetimesecs');
 
             $auserinputs = $userinputs[0];
-            $resultsfromapi = $this->posttoapi($auserinputs);
-            $responsebody=wp_remote_retrieve_body($resultsfromapi);
-            echo $reqdate=wp_remote_retrieve_header($resultsfromapi, 'date');
+            $resultsfromapi = $this->posttoapi($auserinputs, $apiusername, $apiuserpwd);
+            $responsebody = wp_remote_retrieve_body($resultsfromapi);
+            echo $reqdate = wp_remote_retrieve_header($resultsfromapi, 'date');
 
             $aresults = json_decode($responsebody, true);
             $amydata=$aresults['form'];
