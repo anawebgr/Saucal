@@ -22,4 +22,8 @@ Create a new Tab "Saucal" with  Settings Form
 
 require_once 'modify_account_saucal_gtompeas.php';
 
-
+/* The code part that create the widget
+Get the user settings from Tab "Saucal"
+post them to api and display the results
+ */
+require_once 'widget_class_saucal_gtompeas.php';
