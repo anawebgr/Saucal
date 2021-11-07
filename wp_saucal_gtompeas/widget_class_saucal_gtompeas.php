@@ -74,14 +74,33 @@ class saucal_gtompeas_widget extends WP_Widget
             $cachetimesecs= get_user_meta($current_user->ID, 'cachetimesecs');
 
             $auserinputs = $userinputs[0];
+
+            if (false === ($value = get_transient('xsaucal_tompeas'.$current_user->ID))) {
+                echo "Data from api".$value."-".$current_user->ID."<br>";
+
+
+
             $resultsfromapi = $this->posttoapi($auserinputs, $apiusername, $apiuserpwd);
             $responsebody = wp_remote_retrieve_body($resultsfromapi);
             echo $reqdate = wp_remote_retrieve_header($resultsfromapi, 'date');
 
             $aresults = json_decode($responsebody, true);
-            $amydata=$aresults['form'];
+            $amydata = $aresults['form'];
+            $smydata = implode("<br>", $amydata);
+            delete_transient( 'xsaucal_tompeas'.$current_user->ID );
+            set_transient('xsaucal_tompeas'.$current_user->ID, $amydata,890 );
+       
+          
+
+        }else
+        {
+            $amydata = get_transient('xsaucal_tompeas'.$current_user->ID);
+            echo "<br>------------------Cached Data----------<br>";
             $smydata=implode("<br>",$amydata);
-            echo "<br>".$smydata;
+        }
+
+   
+        echo $smydata;
         }
     }
 
