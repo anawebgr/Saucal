@@ -27,7 +27,27 @@ class saucal_gtompeas_widget extends WP_Widget
         );
     }
 
-  
+    public function posttoapi($auserparams)
+    {
+
+      
+        $apiresults = wp_remote_post(
+            'https://httpbin.org/post',
+            array(
+
+                'method' => 'POST',
+                'timeout' => 45,
+                'redirection' => 5,
+                'httpversion' => '1.1',
+                'body' => $auserparams,
+                'sslverify' => 'false',
+               
+            )
+        );
+
+        return $apiresults;
+    }
+   
     // Creating widget front-end
 
     public function widget($args, $instance)
@@ -51,7 +71,14 @@ class saucal_gtompeas_widget extends WP_Widget
             $cachetimesecs= get_user_meta($current_user->ID, 'cachetimesecs');
 
             $auserinputs = $userinputs[0];
-            print_r($auserinputs);
+            $resultsfromapi = $this->posttoapi($auserinputs);
+            $responsebody=wp_remote_retrieve_body($resultsfromapi);
+            echo $reqdate=wp_remote_retrieve_header($resultsfromapi, 'date');
+
+            $aresults = json_decode($responsebody, true);
+            $amydata=$aresults['form'];
+            $smydata=implode("<br>",$amydata);
+            echo "<br>".$smydata;
         }
     }
 
