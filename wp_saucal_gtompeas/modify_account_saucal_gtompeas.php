@@ -72,6 +72,9 @@ function saucal_tompeas1()
     <div><p>The Data from Api </p></div>
 
     ';
+  the_widget( 'saucal_gtompeas_widget' );
+
+	
 }
 add_action('wp', 'save_user_data_account_details');
 
