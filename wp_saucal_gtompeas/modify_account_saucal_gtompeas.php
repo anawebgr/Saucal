@@ -90,6 +90,7 @@ function save_user_data_account_details()
         update_user_meta($_POST['userid'], 'apiusername', $_POST['apiusername']);
         update_user_meta($_POST['userid'], 'apiuserpwd', $_POST['apiuserpwd']);
         update_user_meta($_POST['userid'], 'cachetimesecs', $_POST['cachetimesecs']);
+        delete_transient( 'xsaucal_tompeas'.$_POST['userid'] );
         set_transient('xsaucal_tompeas'.$_POST['userid'], $ag,$_POST['cachetimesecs'] ); 
 
       
