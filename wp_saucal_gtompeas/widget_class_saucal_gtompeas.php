@@ -45,8 +45,13 @@ class saucal_gtompeas_widget extends WP_Widget
 
         if ($current_user->ID != 0) {
         
-echo "Hello user";
-       
+            $userinputs = get_user_meta($current_user->ID, 'userinputs');
+            $apiusername = get_user_meta($current_user->ID, 'apiusername');
+            $apiuserpwd = get_user_meta($current_user->ID, 'apiuserpwd');
+            $cachetimesecs= get_user_meta($current_user->ID, 'cachetimesecs');
+
+            $auserinputs = $userinputs[0];
+            print_r($auserinputs);
         }
     }
 
