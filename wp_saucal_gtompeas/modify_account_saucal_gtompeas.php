@@ -38,7 +38,11 @@ function saucal_tompeas1()
     $current_user = wp_get_current_user();
 
     $userinputsdata = get_user_meta($current_user->ID, 'userinputs');
-    $userinputsdataval = implode("\n", $userinputsdata[0]);
+    if (isset($userinputsdata[0]))
+	$userinputsdataval = implode("\n", $userinputsdata[0]);
+    else
+	$userinputsdataval='';	
+	
 
     echo '<h3>Saucal Test Tompeas</h3><p>Please Complete the Form Below </p>';
     echo '<p>Every Line  is a New Data Entry </p>';

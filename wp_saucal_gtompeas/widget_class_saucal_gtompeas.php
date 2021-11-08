@@ -55,8 +55,9 @@ class saucal_gtompeas_widget extends WP_Widget
 
     public function widget($args, $instance)
     {
+		if (!empty($instance['title'])) {
         $title = apply_filters('widget_title', $instance['title']);
-
+		}
 
         if (!empty($title)) {
             echo $args['before_title'] . $title . $args['after_title'];
@@ -72,15 +73,18 @@ class saucal_gtompeas_widget extends WP_Widget
             $apiusername = get_user_meta($current_user->ID, 'apiusername');
             $apiuserpwd = get_user_meta($current_user->ID, 'apiuserpwd');
             $cachetimesecs= get_user_meta($current_user->ID, 'cachetimesecs');
-
-            $auserinputs = $userinputs[0];
+          
+            if (isset($userinputs[0]))
+			$auserinputs = $userinputs[0];
+		    else
+            $auserinputs='';
 
             if (false === ($value = get_transient('xsaucal_tompeas'.$current_user->ID))) {
                 echo "Data from api".$value."-".$current_user->ID."<br>";
 
 
 
-            $resultsfromapi = $this->posttoapi($auserinputs, $apiusername, $apiuserpwd);
+            $resultsfromapi = $this->posttoapi($auserinputs, $apiusername[0], $apiuserpwd[0]);
             $responsebody = wp_remote_retrieve_body($resultsfromapi);
             echo $reqdate = wp_remote_retrieve_header($resultsfromapi, 'date');
 
@@ -100,7 +104,7 @@ class saucal_gtompeas_widget extends WP_Widget
         }
 
    
-        echo $smydata;
+        echo "<br>".$smydata;
         }
     }
 
