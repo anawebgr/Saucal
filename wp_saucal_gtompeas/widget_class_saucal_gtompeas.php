@@ -92,7 +92,7 @@ class saucal_gtompeas_widget extends WP_Widget
             $amydata = $aresults['form'];
             $smydata = implode("<br>", $amydata);
             delete_transient( 'xsaucal_tompeas'.$current_user->ID );
-            set_transient('xsaucal_tompeas'.$current_user->ID, $amydata,890 );
+            set_transient('xsaucal_tompeas'.$current_user->ID, $amydata,$cachetimesecs[0] );
        
           
 

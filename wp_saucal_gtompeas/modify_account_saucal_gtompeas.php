@@ -61,7 +61,7 @@ function saucal_tompeas1()
             <p>   <input name="apiuserpwd" id="apiuserpwd" value="ff" placeholder="Complete the user pwd for the api"</p>
             <div class="clear"></div>
             <p>   <label for="cachetimesecs">Cache Expiration in secs &nbsp;<span class="required">*</span></label></p>
-            <p>   <input name="cachetimesecs" id="cachetimesecs" value="60" placeholder="How many secs cache live"</p>
+            <p>   <input name="cachetimesecs" id="cachetimesecs" value="890" placeholder="How many secs cache live"</p>
          
 
             <div class="clear"></div>
